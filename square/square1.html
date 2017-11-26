@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        html,body{
+            height: 100%;
+        }
+        #canva {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+
+    <canvas id='canvas' width ="1000" height = '600'></canvas>
+    <script>
+        const canvas = document.getElementById('canvas');
+        // 创建2d环境
+        const context = canvas.getContext('2d'); 
+        //正方形的圆角 描边属性
+        context.lineJoin = 'round';
+        //决定了在canvas之中绘制线段的屏幕像素宽度。他必须是个非负,非无穷的double值 默认是1.0
+        context.lineWidth = 30;
+
+        context.font = '24px Helvetica';
+        //使用fillStyle填充文本的中的字符 strokeText 使用strokeStyle描绘文本的字符的轮廓钱
+        context.fillText('Click anywhere to erase', 175, 200);
+        //指定了对路径进行描边时所用的绘制风格。该值可被设定为某个颜色，渐变色或图案
+        context.strokeStyle = 'goldenrod';
+        //指定绘图环境在后续的图形填充操作中所使用的颜色 渐变色 或图案
+        context.fillStyle = 'rgba(0,0,255,0.5)';
+        //矩形描边 x坐标点 y坐标点 宽度 高度
+        context.strokeRect(75,100,200,200);
+        //填充指定的矩形
+        context.fillRect(325,100,200,200);
+
+        context.canvas.onmousedown = function(e){
+            //将指定矩形与当前剪辑区域相交范围内的所有像素清除
+            //默认剪辑区域大小就是整个canvas 所以如果你没有改动剪辑区域的话，那么所有像素都会被清除
+            context.clearRect(0,0,canvas.width,canvas.height);
+        };
+    </script>
+</body>
+</html>

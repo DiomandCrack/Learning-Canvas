@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <canvas id = 'canvas' width = '600' height = '300'></canvas>
+    <script>
+        const canvas = document.getElementById('canvas');
+        const context = canvas.getContext('2d');
+
+        context.beginPath();
+        context.rect(10,10,100,100);
+        context.stroke();
+        //beginPath()开始新的路径 并清除当前路径的所有子路径
+        context.beginPath();
+        //如果这里没有beginPath rect()会重绘第一个矩形
+        //rect()在(x,y)建立一个宽度为width,高度为height的矩形子路径 该路径是封闭的,而且总是按逆时针方向
+        context.rect(50,50,100,100);
+        context.stroke();
+    </script>
+</body>
+</html>

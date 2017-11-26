@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <canvas id = 'canvas' width = '600' height = '400'></canvas>
+    <script>
+        //非零环绕规则:
+        /*
+        对于路径中任意给定区域,从该区域内部画一条足够长的线段,使此线段的终点完全落在路径范围之外
+
+        计数器初始化0 每当这条线段与路径上的直线或曲线相交时,就改变计数器
+        如果与路径的顺时针部分相交,计数器加1,如果与路径的逆时针部分相交,计数器-1
+        若计数器的最终数值不是0,那么次区域就在路径里面
+        */
+        const context = document.getElementById('canvas').getContext('2d');
+
+        //function--------------------------------------------------------------
+
+        function drawGrid(context, color, stepx, stepy){
+            context.strokStyle = color;
+            context.lineWidth = 0.5;
+
+            for(var i = stepx + 0.5; i < context.canvas.width; i += stepx){
+                context.beginPath();
+                context.moveTo(i,0);
+                context.lineTo(i,context.canvas.height);
+                context.stroke();
+            }
+
+            for(var i = stepy + 0.5; i<context.canvas.height; i += stepy){
+                context.beginPath();
+                context.moveTo(0,i);
+                context.lineTo(context.canvas.width,i);
+                context.stroke();
+            }
+        }
+
+        function drawTwoArcs(){
+            context.beginPath();
+            context.arc(300, 190, 150, 0, Math.PI*2,false); //外部圆
+            
+            //context.beginPath();
+            context.arc(300, 190, 100, 0, Math.PI*2,true); //内部圆路径
+            //arc()方法向当前路径中增加子路径时,该方法必须将上一条子路径的终点与所画
+            //弧的起点相连
+            context.fill();
+            context.shadowOffsetX = 0;
+            context.shadowOffsetY = 0;
+            context.stroke();
+        }
+
+        function draw(){
+            context.clearRect(0,0,context.canvas.width,context.canvas.height);
+            //drawGrid(context,'lightgray',10,10);
+           
+            context.save();
+
+            context.shadowColor = 'rgba(0,0,0,0.8)';
+            context.shadowOffsetX = 12;
+            context.shadowOffsetX = 12;
+            context.shadowBlur = 15;
+
+            drawTwoArcs();
+
+            context.restore();
+        }
+
+        context.fillStyle = 'rgba(100,140,230,0.5)';
+        context.strokeStyle = context.fillStyle;
+
+        draw();
+    </script>
+</body>
+</html>

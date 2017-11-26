@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <canvas id='iconCanvas' width='75' height='670'>
+    </canvas>
+
+    <script>
+    //不管要画的是图形/文本/还是图像，都可以通过修改绘图环境中的四个属性来指定阴影效果
+    //shadowColor: css3格式的颜色
+    //shadowOffsetX：从图形或文本到阴影的水平像素偏移。
+    //shadowOffsetY：从图形或文本到阴影的垂直像素便宜
+    //shadowBlur：一个与像素无关的值。该值被用与高斯模糊方程之中，以便对阴影进行模糊化处理
+        const shadowColor = 'rgba(0,0,0,0.7);'
+
+        function setIconShadow(){
+            iconContext.shadowColor = shadowColor;
+            iconContext.shadowOffsetX = 1;
+            iconContext.shadowOffsetY = 1;
+            iconContext.shadowBlur = 2;
+        };
+
+        function setSelectedIconshadow(){
+            iconContext.shadowColor = shadowColor;
+            iconContext.shadowOffsetX = 4;
+            iconContext.shadowOffsetY = 4;
+            iconContext.shadowBlur = 5;
+        }
+    </script>
+</body>
+</html>

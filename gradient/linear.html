@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+   <canvas id = 'canvas' width = '600' height = '300'></canvas> 
+    <script>
+        const canvas = document.getElementById('canvas');
+
+        const context = canvas.getContext('2d');
+
+        // const gradient = context.createLinearGradient( 0, 0, canvas.width,0);
+        // const gradient = context.createLinearGradient(0 , 0 , 0 , canvas.height);
+        // const gradient = context.createLinearGradient(0,0,canvas.width,canvas.height);
+        //传入两个点的x,y的坐标，两点的连线就是canvas建立颜色渐变效果的一句 起始点 坐标 终点坐标
+        const gradient = context.createLinearGradient(0,0,0,canvas.height/2);
+        
+        gradient.addColorStop(0,'blue')
+        gradient.addColorStop(0.25,'cyan');
+        gradient.addColorStop(0.5,'yellow');
+        gradient.addColorStop(0.75,'orange');
+        gradient.addColorStop(1,'red');
+
+        context.fillStyle = gradient;
+        context.rect(0,0,canvas.width,canvas.height);
+
+        context.fill();
+        
+    </script>
+</body>
+</html>

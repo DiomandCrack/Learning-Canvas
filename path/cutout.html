@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <canvas id = 'canvas' width = '600' height = '600'></canvas>
+<!--     <script>
+        function drawCutouts() {
+            context.beginPath();
+
+            addOuterRectanglePath(); //外围
+
+            addCirclePath();//内部
+            addTrianglePath();//内部
+            addRectanglePath();
+
+            context.fill();
+        }
+
+        //创建自定义rect方法 控制路径方向
+
+        function rect(x, y, w, h, direction){
+            if(direction){
+                context.moveTo(x,y);
+                context.lineTo(x,y + h);
+                context.lineTo(x + w, y);
+            }else{
+                context.moveTo(x,y);
+                context.lineTo(x + w,y);
+                context.lineTo(x + w,y + h);
+                context.lineTo(x,y + h);
+            }
+
+            context.closePath();
+
+        }
+
+    </script> -->
+    <script src="cutout.js">
+        
+    </script>
+</body>
+</html>
