@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <canvas id = 'canvas' width = '600' height = '300'></canvas>
+    <script>
+    const canvas = document.getElementById('canvas');
+    
+    const context = document.getElementById('canvas').getContext('2d');
+
+    function drawGrid(context, color, stepx, stepy){
+        canvas.style.border = `1px solid ${color}`;   
+        context.strokeStyle = color;
+        //规范没有明确规定 所有浏览器的canvas都使用了 抗锯齿 技术 实现 亚像素
+        //抗锯齿: 对图像边缘进行柔化,使之看起来更平滑
+        //亚像素: 将像素分解为更小的区域,在这些区域内分别进行渲染
+        context.lineWidth = 0.5;
+
+        for(let i = stepx + 0.5; i < context.canvas.width; i += stepx){
+            context.beginPath();
+            context.moveTo(i, 0);
+            context.lineTo(i, context.canvas.height);
+            context.stroke();
+        }
+
+        for(let i = stepx + 0.5; i < context.canvas.height; i += stepy){
+            context.beginPath();
+            context.moveTo(0,i);
+            context.lineTo(context.canvas.width, i);
+            context.stroke();
+        }
+    }
+
+    drawGrid(context,'blue',20,20);
+    </script>
+</body>
+</html>
