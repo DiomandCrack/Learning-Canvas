@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>segments path</title>
+</head>
+<body>
+    <canvas id = 'canvas' width = '600' height = '300'></canvas>
+    <script>
+    const context = document.getElementById('canvas').getContext('2d');
+    //创建线段路径 moveTo() lineTo();
+    //必须在创建路径之后调用stroke()方法
+    context.lineWidth = 1;
+    context.beginPath();
+    //moveTo(x,y); 向当前路径中增加一条子路径，该子路径只包含一个点，就是由参数传入的那个点
+    context.moveTo(50,10);
+    //lineTo(x,y);如果当前没有子路径，那么这个方法的行为与moveTo()方法一样 会创建一条新的子路径 如果存在子路径 会向指定的那个点加入路径中
+    context.lineTo(450,10);
+    context.stroke();
+
+    context.beginPath();
+    //如果在像素边界处绘制一条像素宽的垂直线段，那么canvas的绘图环境对象会试着将像素画在边界中线的左右两边各自0.5像素 但是在1像素中绘制半个像素是不可能的 所以会变成2像素
+    //如果要绘制真正的1像素 必须将线段绘制在某两个像素之间的那个像素中
+    context.moveTo(50.5,50.5);
+    context.lineTo(450.5,50.5);
+    context.stroke();
+
+    </script>
+</body>
+</html>
