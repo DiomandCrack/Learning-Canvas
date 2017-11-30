@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Axes</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id='canvas'></canvas>
+    <script>
+        const context = document.getElementById('canvas').getContext('2d');
+        context.canvas.width = window.innerWidth;
+        context.canvas.height = window.innerHeight;
+
+
+        function drawGrid(context, color, stepx, stepy) {
+            context.strokeStyle = color;
+            context.lineWidth = 0.5;
+            context.rect(0, 0, context.canvas.width, context.canvas.height)
+            context.stroke();
+            for (let i = stepx + 0.5; i < context.canvas.width; i += stepx) {
+                context.beginPath();
+                context.moveTo(i, 0);
+                context.lineTo(i, context.canvas.height);
+                context.stroke();
+            }
+
+            for (let i = stepy + 0.5; i < context.canvas.height; i += stepy) {
+                context.beginPath;
+                context.moveTo(0, i);
+                context.lineTo(context.canvas.width, i);
+                context.stroke();
+            }
+        }
+
+        drawGrid(context, '#000', context.canvas.width / 10, context.canvas.height / 10);
+    </script>
+</body>
+
+</html>
