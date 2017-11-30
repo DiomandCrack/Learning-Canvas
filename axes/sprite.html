@@ -1,0 +1,77 @@
+<body>
+    <article>
+        <canvas height="200" width="400" id="genius"></canvas>
+        <div>
+            <button id="forward">forward</button>
+            <button id="right"> right</button>
+            <button id="back">back</button>
+            <button id="left">left</button>
+        </div>
+    </article>
+    <script>
+        var Genius = function(option) {
+            Genius.prototype._init_(option);
+        }
+        Genius.prototype = {
+            constructor: Genius,
+            // 把对象的初始化代码都放在这里,把它需要用到的所有变量都绑定到它的原型上.
+            _init_: function(option) {
+                this.img = option.img;
+                this.rowIndex = option.rowIndex;
+                this.columnIndex = option.columnIndex;
+                this.frame = option.frame;
+                this.singleWidth = option.singleWidth;
+                this.singleHeight = option.singleHeight
+            },
+            // 由于js面向对象的特点,获取会从父对象的prorotype里面获取,但是设置只会设置自己的
+            draw: function(ctx, direction) {
+                window.clearInterval(this.intervalId);
+                this.rowIndex = direction;
+                // 一定要设置,因为在setInterval里面,this指的就是window变量
+                var that = this;
+                this.intervalId = setInterval(function() {
+                    // 在没绘制一张小图片之前,都要清空之前绘制的图片,这样才能显示出动画效果来,
+                    ctx.clearRect(10, 10, that.singleWidth, that.singleHeight);
+                    //  在大图上剪切绘制绘制
+                    ctx.drawImage(that.img, that.columnIndex * that.singleWidth, that.rowIndex * that.singleHeight, that.singleWidth, that.singleHeight, 10, 10, that.singleWidth, that.singleHeight);
+                    that.columnIndex++;
+                    that.columnIndex %= 4;
+                }, 1000 / that.frame);
+
+            }
+
+        }
+        window.onload = function() {
+            var ctx = document.getElementById('genius').getContext('2d');
+            var oringinImg = new Image();
+            oringinImg.src = "./129.png";
+            var genius;
+            oringinImg.onload = function() {
+                // 实例化构造一个对象
+                genius = new Genius({
+                    img: oringinImg,
+                    rowIndex: 0,
+                    columnIndex: 0,
+                    frame: 6,
+                    singleWidth: 48,
+                    singleHeight: 48
+                });
+                // 调用Genius的prototype里面的draw方法.
+                genius.draw(ctx, 0);
+
+            }
+            document.querySelector('#forward').addEventListener('click', () => {
+                genius.draw(ctx, 0);
+            });
+            document.querySelector('#left').addEventListener('click', () => {
+                genius.draw(ctx, 1);
+            });
+            document.querySelector('#right').addEventListener('click', () => {
+                genius.draw(ctx, 2);
+            });
+            document.querySelector('#back').addEventListener('click', () => {
+                genius.draw(ctx, 3);
+            });
+        };
+    </script>
+</body>

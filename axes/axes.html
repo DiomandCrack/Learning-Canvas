@@ -7,19 +7,48 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Axes</title>
     <style>
-        body {
-            margin: 0;
-            overflow: hidden;
+        #canvas {
+            margin: auto;
         }
     </style>
 </head>
 
 <body>
-    <canvas id='canvas'></canvas>
+    <canvas id='canvas' width="600" height="600"></canvas>
     <script>
         const context = document.getElementById('canvas').getContext('2d');
-        context.canvas.width = window.innerWidth;
-        context.canvas.height = window.innerHeight;
+
+        const canvas = document.getElementById('canvas');
+
+        const axisMargin = 40;
+        //坐标轴原点相对于canvas的坐标点为(40,40) 
+        const axisOrigin = {
+            x: axisMargin,
+            y: canvas.height - axisMargin
+        };
+
+        const axisTop = axisMargin;
+        const axisRight = canvas.width - axisMargin;
+        //坐标轴的末尾的点相对于画布的top值和right值
+
+        const horizontalTickSpacing = 10;
+        const verticalTickSpacing = 10;
+        //单位长度为10px
+
+        const axisWidth = axisRight - axisOrigin.x;
+        const axisHeight = axisOrigin.y - axisTop;
+        //坐标轴的长和宽
+
+        const numVerticalTicks = axisHeight / verticalTickSpacing;
+        const numHorizontalTicks = axisWidth / horizontalTickSpacing;
+        //横坐标有多少坐标点 纵坐标有多少坐标点
+
+        const tickWidth = 10;
+        const ticksLineWidth = 0.5;
+
+        const ticksColor = 'navy';
+        const axisLineWidth = 1.0;
+        const axisColor = 'blue'
 
 
         function drawGrid(context, color, stepx, stepy) {
@@ -35,14 +64,82 @@
             }
 
             for (let i = stepy + 0.5; i < context.canvas.height; i += stepy) {
-                context.beginPath;
+                context.beginPath();
                 context.moveTo(0, i);
                 context.lineTo(context.canvas.width, i);
                 context.stroke();
             }
         }
 
-        drawGrid(context, '#000', context.canvas.width / 10, context.canvas.height / 10);
+        drawGrid(context, '#000', 20, 20);
+
+        //Grid--------------------------------------
+        function drawAxes() {
+            context.save();
+            context.strokeStyle = axisColor;
+            context.lineWidth = axisLineWidth;
+
+            drawHorizontalAxis();
+            drawVerticalAxis();
+
+            context.lineWidth = 0.5;
+            context.lineWidth = ticksLineWidth;
+            context.strokeStyle = ticksColor;
+
+            drawVerticalAxisTicks();
+            drawHorizontalAxisTicks();
+
+            context.restore();
+        }
+
+        function drawHorizontalAxis() {
+            context.beginPath();
+            context.moveTo(axisOrigin.x, axisOrigin.y);
+            context.lineTo(axisRight, axisOrigin.y);
+            context.stroke();
+        }
+
+        function drawVerticalAxis() {
+            context.beginPath();
+            context.moveTo(axisOrigin.x, axisOrigin.y);
+            context.lineTo(axisOrigin.x, axisTop);
+            context.stroke();
+        }
+
+        function drawVerticalAxisTicks() {
+            let deltaX;
+            for (var i = 1; i < numVerticalTicks; ++i) {
+                context.beginPath();
+                if (i % 5 === 0) {
+                    deltaX = tickWidth;
+                } else {
+                    deltaX = tickWidth / 2
+                }
+
+                context.moveTo(axisOrigin.x - deltaX, axisOrigin.y - i * verticalTickSpacing);
+                context.lineTo(axisOrigin.x + deltaX, axisOrigin.y - i * verticalTickSpacing);
+                context.stroke();
+            }
+        }
+
+        function drawHorizontalAxisTicks() {
+            let deltaY;
+
+            for (var i = 1; i < numHorizontalTicks; i++) {
+                context.beginPath();
+                if (i % 5 === 0) {
+                    deltaY = tickWidth;
+                } else {
+                    deltaY = tickWidth / 2;
+                }
+                context.moveTo(axisOrigin.x + i * horizontalTickSpacing, axisOrigin.y - deltaY);
+                context.lineTo(axisOrigin.x + i * horizontalTickSpacing, axisOrigin.y + deltaY);
+
+                context.stroke();
+            }
+        }
+
+        drawAxes();
     </script>
 </body>
 
