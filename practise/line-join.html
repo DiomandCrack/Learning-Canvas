@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <canvas id='canvas' width=' 900' height=' 300'></canvas>
+    <script>
+        const canvas = document.getElementById('canvas');
+
+        const context = canvas.getContext('2d');
+        context.lineWidth = 25;
+        //miter line
+        context.beginPath();
+
+
+        context.moveTo(99, 150);
+        context.lineTo(149, 50);
+        context.lineTo(199, 150);
+        context.lineJoin = 'miter';
+
+        context.stroke();
+
+        //round line;
+        context.moveTo(239, 150);
+        context.lineTo(289, 50);
+        context.lineTo(339, 150);
+        context.lineJoin = 'round';
+
+        context.stroke();
+
+        //bevel line;
+        context.beginPath();
+
+        context.moveTo(379, 150);
+        context.lineTo(429, 50);
+        context.lineTo(479, 150);
+        context.lineJoin = 'bevel';
+        context.stroke();
+
+        //miterLimit
+        context.beginPath();
+
+        context.moveTo(529, 150);
+        context.lineTo(579, 50);
+        context.lineTo(629, 150);
+        context.miterLimit = 2;
+        context.stroke();
+    </script>
+</body>
+
+</html>

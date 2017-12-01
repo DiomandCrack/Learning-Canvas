@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <canvas id='canvas' width=' 600' height=' 300'></canvas>
+    <script>
+        const canvas = document.getElementById('canvas');
+        const context = canvas.getContext('2d');
+
+        context.beginPath();
+        context.moveTo(100, 20);
+        //第一段
+        context.lineTo(200, 160);
+        context.quadraticCurveTo(230, 200, 250, 120);
+        context.bezierCurveTo(290, -40, 300, 200, 400, 150);
+        //第二段
+        context.lineTo(500, 90);
+
+        context.lineWidth = 5;
+        context.strokeStyle = 'blue';
+        context.stroke();
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <canvas id='canvas' width='600' height='600'>
+    </canvas>
+    <script>
+        const context = document.querySelector('#canvas').getContext('2d');
+        //设置虚线的api setLineDash()
+        //接受数组 数组中是一组描述交替绘制线段和间距（坐标空间单位）长度的数字[长短,间隔] 如果传入的是奇数 会复制数组 [长度,间隔,长度,间隔,长度,间隔]
+        function drawDashedLine(context, x1, y1, x2, y2, dashLength) {
+            dashLength = dashLength === undefined ? 5 : dashLength;
+
+            const deltaX = x2 - x1;
+            const deltaY = y2 - y1;
+
+            const numDashes = Math.floor(
+                Math.sqrt(deltaX * deltaX + deltaY * deltaY / dashLength)
+            );
+            for (let i = 0; i < numDashes; i++) {
+                context[i % 2 === 0 ? 'moveTo' : 'lineTo'](x1 + (deltaX / numDashes) * i, y1 + (deltaY / numDashes) * i);
+            }
+
+            context.stroke();
+        };
+
+        context.lineWidth = 3;
+        context.strokeStyle = 'blue';
+        drawDashedLine(context, 20, 20, context.canvas.width - 20, 20);
+        drawDashedLine(context, context.canvas.width - 20, 20,
+            context.canvas.width - 20, context.canvas.height - 20, 10);
+        drawDashedLine(context, context.canvas.width - 20, context.canvas.height - 20, 20, context.canvas.height - 20, 15);
+        drawDashedLine(context, 20, context.canvas.height - 20, 20, 20, 2);
+    </script>
+</body>
+
+</html>

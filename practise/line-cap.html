@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <canvas id='canvas' width=' 600' height=' 600'></canvas>
+    <script>
+        const canvas = document.getElementById('canvas');
+        const context = canvas.getContext('2d');
+
+        //线帽是平直的边缘
+        context.beginPath();
+        context.moveTo(200, canvas.height / 2 - 50);
+        context.lineTo(canvas.width - 200, canvas.height / 2 - 50);
+        context.lineWidth = 20;
+        context.strokeStyle = '#0000ff';
+        context.lineCap = 'butt';
+        context.stroke();
+
+        //线帽是圆形
+        context.beginPath();
+        context.moveTo(200, canvas.height / 2);
+        context.lineTo(canvas.width - 200, canvas.height / 2);
+        context.lineWidth = 20;
+        context.strokeStyle = '#00ffff';
+        context.lineCap = 'round';
+        context.stroke();
+
+        //线帽是正方形
+        context.beginPath();
+        context.moveTo(200, canvas.height / 2 + 50);
+        context.lineTo(canvas.width - 200, canvas.height / 2 + 50);
+        context.lineWidth = 20;
+        context.strokeStyle = '#ff00ff';
+        context.lineCap = 'square';
+        context.stroke();
+    </script>
+</body>
+
+</html>
