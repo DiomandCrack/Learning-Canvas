@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <canvas id = 'canvas' width = '600' height = '300'></canvas>
+    <script>
+        const canvas = document.getElementById('canvas');
+        const context = document.getElementById('canvas').getContext('2d');
+
+        const centerX = canvas.width / 2;
+        const centerY = canvas.height / 2;
+        const radius = 70;
+
+        context.beginPath();
+        context.arc(centerX, centerY, radius, 0, 2*Math.PI,false);
+        context.fillStyle = 'orange';
+        context.fill();
+        context.lineWidth = 5;
+        context.strokeStyle = 'orange';
+        context.strok();
+    </script>
+</body>
+</html>
